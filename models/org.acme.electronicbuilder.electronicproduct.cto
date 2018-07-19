@@ -1,0 +1,125 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * Write your model definitions here
+ */
+
+namespace org.acme.electronicbuilder.electronicproduct
+
+import org.acme.electronicbuilder.participant.Buyer
+
+participant SampleParticipant identified by participantId {
+  o String participantId
+  o String firstName
+  o String lastName
+}
+
+asset Parts identified by partId {
+  o String partId
+  o String partName
+  o Double partPrice
+  o String description
+  o Boolean isActive
+}
+
+asset Product identified by productId {
+  o String productId
+  o String productName
+  o String description
+  o Boolean isActive
+  --> Parts[] parts optional
+  o Double costPrice optional
+}
+
+asset Orders identified by orderId {
+  o String orderId
+  --> Buyer buyer
+  --> Product product
+  o OrderStatus orderStatus
+  o Integer quantity
+  o Double buyerCost optional
+}
+
+enum OrderStatus {
+  o Requested
+  o Pending
+  o Complete
+}
+
+
+//Transaction for EngineerGroup to create parts
+transaction CreatePart {
+  o String partId
+  o String partName
+  o Double partPrice
+  o String description
+}
+
+transaction CreateProduct {
+  o String productId
+  o String productName
+  o String description
+}
+
+transaction AddProductParts
+{
+  --> Product asset
+  o String[] parts
+}
+
+transaction UpdateProductByBusinessGroup {
+  --> Product asset
+  o String productName
+  o String description
+  o Boolean isActive
+}
+
+//Transaction for Buyer to request an order
+transaction CreateOrder {
+  o String orderId
+  o String productId
+  o Integer quantity
+}
+
+//Transaction for BusinessGroup to set price based on agreed terms after communication with Buyer
+transaction SetOrderPrice {
+  --> Orders asset
+  o Double buyerCost
+}
+
+//Transaction for Buyer to confirm price/accept the charges in a real world situation.
+transaction AcceptOrderCost {
+  --> Orders asset
+}
+
+
+
+
+
+
+
+//Event test code
+asset SampleAsset identified by assetId {
+  o String assetId
+  --> SampleParticipant owner
+  o String value
+}
+
+
+event SampleEvent {
+  --> SampleAsset asset
+  o String oldValue
+  o String newValue
+}
