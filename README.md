@@ -11,6 +11,13 @@ In order to successfully run the electronic builder POC, one should have a basic
 - Select Deploy the network
 
 ### Setup
-- Create participants and issue ID's in the participant resources for BusinessGroup, Buyer, EngineerGroup
-- As an BusinessGroup user. create a new product using the "CreateProduct" Transaction.
-- As an EngineerGroup user. Create parts using the "CreatePart" Transaction
+In the future I intend to create a setup transaction, but for now you must create the asset and participants resources records manually.
+- Create participants and issue ID's for for BusinessGroup, EngineerGroup, and Buyer resources.
+- As a BusinessGroup participant, create a new product using the "CreateProduct" transaction.
+- As an EngineerGroup participant, create parts using the "CreatePart" transaction.
+- As an EngineerGroup participant, add the created parts to an existing Product with the "AddProductParts" transaction.
+- As a BusinessGroup participant, update the product and set it active with the "UpdateProductByBusinessGroup" transaction.
+- As a Buyer participant, order an active product using the "CreateOrder" transaction.
+- As a BusinessGroup participant, set the order price using the "SetOrderPrice" transaction.
+- As a Buyer participant, accept the order price with the "AcceptOrderCost" transaction.
+
