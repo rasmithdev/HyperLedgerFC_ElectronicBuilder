@@ -20,12 +20,6 @@ namespace org.acme.electronicbuilder.electronicproduct
 
 import org.acme.electronicbuilder.participant.Buyer
 
-participant SampleParticipant identified by participantId {
-  o String participantId
-  o String firstName
-  o String lastName
-}
-
 asset Parts identified by partId {
   o String partId
   o String partName
@@ -93,8 +87,20 @@ transaction CreateOrder {
   o Integer quantity
 }
 
+event CreateOrderEvent {
+  o String orderId
+  o String productId
+  o Integer quantity
+  --> Buyer buyer
+}
+
 //Transaction for BusinessGroup to set price based on agreed terms after communication with Buyer
 transaction SetOrderPrice {
+  --> Orders asset
+  o Double buyerCost
+}
+
+event SetOrderPriceEvent {
   --> Orders asset
   o Double buyerCost
 }
@@ -104,22 +110,6 @@ transaction AcceptOrderCost {
   --> Orders asset
 }
 
-
-
-
-
-
-
-//Event test code
-asset SampleAsset identified by assetId {
-  o String assetId
-  --> SampleParticipant owner
-  o String value
-}
-
-
-event SampleEvent {
-  --> SampleAsset asset
-  o String oldValue
-  o String newValue
+event AcceptOrderCostEvent {
+  --> Orders asset
 }
