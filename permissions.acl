@@ -65,6 +65,15 @@ rule EngineerGroupProductAsset {
     action: ALLOW
 }
 
+//EngineerGroup Transactions
+rule EngineerCreatePart {
+    description: "Allows Buyers to run this transaction"
+    participant: "org.acme.electronicbuilder.participant.EngineerGroup"
+    operation: ALL
+    resource: "org.acme.electronicbuilder.electronicproduct.CreatePart"
+    action: ALLOW
+}
+
 
 //BusinessGroup Rules
 //BusinessGroup Product Asset
