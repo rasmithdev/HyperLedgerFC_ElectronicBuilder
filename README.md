@@ -1,6 +1,9 @@
 # Hyperledger Fabric Electronic Builder
 This is a proof of concept project demonstrating how assets, participants, and transactions can be used to create a basic business network with Hyperledger Composer. The Electronic Builder business network demonstrates the lifecycle of a product being requested, engineers designing it, and buyers ordering the product.
 
+The idea behind this blockchain prototype is to demonstrate a network that could be applied to a consortium of electronic part manufacturers such as https://www.ecianow.org/. I am still updating the network with new models and transactions. I need to better model the EngineerGroup and BusinessGroup participants so that provenance/origin of parts is better represented for a consortium of manufacturers. Additional permissions in the access control list (ACL) will then be added.
+
+
 ### Prerequisites
 In order to successfully run the electronic builder POC, one should have a basic understanding of how to use the Hyperledger Composer Playground. If this is your first time, I recommend getting started with the Composer Playground by using the following tutorial. https://hyperledger.github.io/composer/latest/tutorials/playground-tutorial.html
 
